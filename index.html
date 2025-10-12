@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Essig Schiefl — Startseite</title>
+  <meta name="description" content="HTML/CSS-Website mit Startseite, Produkten, Angebote und Kontakt." />
+
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --accent: #2463ff;
+      --muted: #6b7280;
+      --radius: 12px;
+      --maxw: 1100px;
+      --gap: 1rem;
+      font-family: Inter, system-ui, sans-serif;
+      color: #0f1724;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      line-height: 1.45;
+      font-size: 16px;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 1.25rem; }
+
+    /* HEADER */
+    header {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(15,23,36,0.06);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .logo {
+      width: 260px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .navlinks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color .2s;
+    }
+
+    nav a:hover {
+      color: #003fe0;
+    }
+
+    .cta {
+      background: var(--accent);
+      color: white;
+      padding: .45rem .8rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* SECTIONS */
+    section { display: none; padding: 1rem 0; }
+    section:target { display: block; }
+    #home { display: block; }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .hero h1 { margin: 0; font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
+    .hero p { margin: 0; color: var(--muted); }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 6px 18px rgba(15,23,36,0.06);
+    }
+
+    /* PRODUKTE */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: var(--gap);
+      margin-top: 1rem;
+    }
+
+    .product {
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .thumb {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .pmeta h3 { margin: 0 0 .25rem 0; }
+    .price { font-weight: 700; }
+
+    .Angebote-list {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: 1rem;
+    }
+
+    /* FORM */
+    form { display: grid; gap: .75rem; }
+    input, textarea, button {
+      padding: .6rem .75rem;
+      border-radius: 10px;
+      border: 1px solid #e6e9ef;
+      font: inherit;
+    }
+
+    textarea { min-height: 120px; resize: vertical; }
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media(min-width:650px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    @media(min-width:980px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="card">
+      <img class="logo" src="Logo_essig.jpg" alt="Essig Schiefl Logo">
+
+      <nav class="navlinks">
+        <a href="#home">Start</a>
+        <a href="#products">Produkte</a>
+        <a href="#Angebote">Angebote</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home">
+        <div class="card hero">
+          <div>
+            <h1>Willkommen bei Essig Schiefl</h1>
+            <p>Wir bieten hochwertige Essigspezialitäten & zuverlässigen Service. Nachhaltig, lokal und kundenorientiert.</p>
+            <p style="margin-top:.75rem"><a class="cta" href="#products">Zu unseren Produkten</a></p>
+          </div>
+          <div style="max-width:420px;color:var(--muted)">
+            <div class="card" style="padding:1rem">
+              <strong>Öffnungszeiten</strong>
+              <div style="margin-top:.25rem">Mo–Fr: 9–12 Uhr</div>
+              <hr style="margin:0.75rem 0;border:none;border-top:1px solid #f0f2f6"/>
+              <div style="font-size:.95rem">Adresse: Plattlingerstr. 38, 94486 Osterhofen</div>
+              <div style="font-size:.95rem">Telefon: +49 9932 908934</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Produkte -->
+      <section id="products">
+        <div class="card">
+          <h2 style="margin-top:0">Produkte</h2>
+          <p style="margin-top:0;color:var(--muted)">Eine kleine Auswahl unserer beliebtesten Artikel.</p>
+
+          <div class="products-grid">
+            <article class="product">
+              <div class="thumb"><img src="Essigflaschen_Collage.jpg" alt="Branntweinessig 5 %" /></div>
+              <div class="pmeta">
+                <h3>Branntweinessig (5 %-Säure)</h3>
+                <div class="price">1,00 €/l*</div>
+                <p style="margin:.4rem 0 .2rem 0;color:var(--muted)">Branntweinessig mit 10 %-Essigsäureanteil, Ideal für XXX</p>
+              </div>
+            </article>
+
+            <article class="product">
+              <div class="thumb"><img src="Branntweinessig.jpg" alt="Branntweinessig 10 %" /></div>
+              <div class="pmeta">
+                <h3>Branntweinessig (10 %-Säure)</h3>
+                <div class="price">1,20 €/l</div>
+                <p style="margin:.4rem 0 .2rem 0;color:var(--muted)">Branntweinessig mit 5 %-Essigsäureanteil, Ideal für XXX</p>
+              </div>
+            </article>
+
+            <article class="product">
+              <div class="thumb"><img src="https://picsum.photos/200/200?random=3" alt="Obstessig" /></div>
+              <div class="pmeta">
+                <h3>Obstessig (5 %-Säure)</h3>
+                <div class="price">1,00 €/l</div>
+                <p style="margin:.4rem 0 .2rem 0;color:var(--muted)">Fruchtiger Obstessig mit 5 %-Essigsäure. Ideal für XXX</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Angebote -->
+      <section id="Angebote">
+        <div class="card">
+          <h2 style="margin-top:0">Angebote</h2>
+          <p style="margin:0;color:var(--muted)">Aktuelle Aktionen, Bundles oder saisonale Angebote.</p>
+
+          <div class="Angebote-list">
+            <div class="card">
+              <strong>Sommer-Bundle</strong>
+              <div style="color:var(--muted);margin-top:.25rem">3 Produkte zum Paketpreis — nur solange der Vorrat reicht.</div>
+            </div>
+            <div class="card">
+              <strong>Neu im Sortiment</strong>
+              <div style="color:var(--muted);margin-top:.25rem">Exklusive Farben & limitierte Auflage.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kontakt -->
+      <section id="contact">
+        <div class="card">
+          <h2 style="margin-top:0">Kontakt</h2>
+          <p style="color:var(--muted)">So findest du uns:</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5266.142576854892!2d13.012648312646279!3d48.7041183711919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47750674031cf859%3A0xcf242420db6f5479!2sEssig%20Schiefl!5e0!3m2!1sen!2sde!4v1759554918117!5m2!1sen!2sde"
+            width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"></iframe>
+
+          <hr style="margin:1rem 0;border:none;border-top:1px solid #f0f2f6"/>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <div style="min-width:180px">
+              <strong>Adresse</strong>
+              <div style="color:var(--muted)">Plattlinger Str. 38<br/>94486 Osterhofen</div>
+            </div>
+            <div style="min-width:180px">
+              <strong>Telefon</strong>
+              <div style="color:var(--muted)">+49 9932 908934</div>
+            </div>
+            <div style="min-width:180px">
+              <strong>Öffnungszeiten</strong>
+              <div style="color:var(--muted)">Mo–Fr 9–12 Uhr</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;align-items:center">
+        <div>© <strong>Essig Schiefl</strong> — Alle Rechte vorbehalten</div>
+        <div style="color:var(--muted)">Impressum • Datenschutz</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
