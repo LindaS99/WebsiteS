@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Essig Schiefl — Spezialitäten & Töpferwaren</title>
+  <meta name="description" content="Hochwertige Essigspezialitäten, Eingelegtes und Töpferwaren in Osterhofen." />
+
+  <style>
+    :root {
+      /* --- FARBPALETTE --- */
+      --bg: #f9f9f7;
+      --card-bg: #ffffff;
+      --primary: #2e7d32;         /* Gurken-Grün */
+      --primary-hover: #1b5e20;
+      --accent-red: #d32f2f;      /* Paprika-Rot */
+      --text-main: #1c1c1e;
+      --text-muted: #58636a;
+      --border: #e0e0e0;
+      --radius: 12px;
+      --max-width: 1200px;
+      --shadow: 0 4px 12px rgba(46, 125, 50, 0.08);
+    }
+
+    /* --- BASIS --- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* --- HEADER --- */
+    header {
+      background: var(--card-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 0.75rem 0;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo { height: 70px; width: auto; object-fit: contain; }
+
+    nav { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    nav a { font-weight: 600; color: var(--text-muted); padding: 0.5rem 0.75rem; border-radius: 8px; transition: all 0.2s; }
+    nav a:hover { color: var(--primary); background: #e8f5e9; }
+    nav a.cta { background: var(--primary); color: white; }
+    nav a.cta:hover { background: var(--primary-hover); }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 3rem 0;
+      background: linear-gradient(to bottom, #ffffff, #f1f8e9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); margin: 0; line-height: 1.1; }
+    .hero span { color: var(--primary); }
+    .hero-intro { font-size: 1.125rem; color: var(--text-muted); max-width: 540px; margin: 0; }
+
+    .info-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      max-width: 400px;
+    }
+
+    .hero-image-container {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -10px rgba(46, 125, 50, 0.2);
+      transform: rotate(2deg);
+      transition: transform 0.3s ease;
+    }
+    .hero-image-container:hover { transform: rotate(0deg); }
+
+    /* --- SECTIONS ALLGEMEIN --- */
+    section { padding: 4rem 0; scroll-margin-top: 100px; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); }
+    .section-title p { color: var(--text-muted); }
+
+    /* --- AKKORDEON (DAS DROPDOWN SYSTEM) --- */
+    /* Das ersetzt die langen Listen. Alles ist aufgeräumt. */
+    details.category-group {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    summary.category-header {
+      padding: 1.2rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      list-style: none; /* Dreieck entfernen Standard */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      color: var(--text-main);
+      transition: background 0.2s;
+    }
+    
+    summary.category-header:hover { background: #f9f9f9; }
+    
+    /* Plus/Minus Icon rechts */
+    summary.category-header::after { 
+      content: '+'; 
+      font-size: 1.5rem; 
+      color: var(--primary); 
+      font-weight: 400;
+    }
+    
+    details[open] summary.category-header::after { content: '−'; }
+    details[open] summary.category-header { border-bottom: 1px solid var(--border); background: #f1f8e9; color: var(--primary); }
+
+    /* Der Inhalt der aufklappt */
+    .category-content {
+      padding: 1.5rem;
+      background: #fff;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- GRID PRODUKTE --- */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .grid-two { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+
+    /* --- KARTEN --- */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: all 0.2s; }
+
+    .card-img {
+      height: 200px;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 1rem;
+    }
+    .card-img img { max-height: 100%; width: auto; object-fit: contain; }
+    .card-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-body h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
+    .price { font-weight: 700; color: var(--primary); font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .desc { font-size: 0.9rem; color: var(--text-muted); }
+    .note { font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem; font-style: italic; }
+
+    /* --- PREISLISTE --- */
+    .price-table-container { margin-top: 0; overflow-x: auto; border: 1px solid #eee; border-radius: 8px; }
+    table.price-list { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+    table.price-list th { background: #f9f9f9; padding: 0.75rem; }
+    table.price-list td { padding: 0.75rem; border-bottom: 1px solid #eee; }
+    .price-tag { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+    /* --- KONTAKT & FOOTER --- */
+    .contact-grid {display: grid; gap: 2rem; grid-template-columns: 1fr; }
+    iframe { border-radius: var(--radius); border: 1px solid var(--border); }
+    footer { background: #1c1c1e; color: #9ca3af; padding: 3rem 0; margin-top: 4rem; text-align: center; font-size: 0.9rem; border-top: 4px solid var(--primary); }
+
+    /* --- MEDIA QUERIES --- */
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-two { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .header-content { flex-direction: row; justify-content: space-between; }
+    }
+    @media (min-width: 900px) {
+      .hero-grid { grid-template-columns: 1.2fr 1fr; }
+      .hero { padding: 5rem 0; }
+    }
+    @media (min-width: 1024px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap header-content">
+      <a href="#">
+        <img class="logo" src="Logo_neu.jpg" alt="Essig Schiefl" onerror="this.style.display='none';this.parentElement.innerHTML='<strong>Essig Schiefl</strong>'">
+      </a>
+      
+      <nav>
+        <a href="#home">Start</a>
+        <a href="#products">Produkte</a> 
+        <a href="#toepferwaren">Töpferwaren</a>
+        <a href="#contact" class="cta">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <div>
+            <h1>Willkommen bei<br><span>Essig Schiefl</span></h1>
+            <p class="hero-intro">
+              Entdecke hochwertige Essigspezialitäten, handgemachtes Eingelegtes zur Brotzeit & einzigartige Töpferwaren.
+            </p>
+          </div>
+          <div style="display:flex; gap:1rem;">
+            <a href="#products" style="background:var(--primary); color:white; padding:0.8rem 1.5rem; border-radius:8px; font-weight:600; box-shadow: 0 4px 6px rgba(46,125,50,0.2);">
+              Zum Sortiment
+            </a>
+          </div>
+          <div class="info-box">
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.5rem; font-weight:700; color:var(--text-main);">
+              <span>⏰</span> Öffnungszeiten
+            </div>
+            <div style="color:var(--text-muted); font-size:0.95rem;">
+              Mo – Fr: 09:00 – 12:00 Uhr<br>
+              <span style="font-size:0.85rem; opacity:0.8">und nach Vereinbarung</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-image-container">
+          <img src="startbild.jpg" alt="Stimmungsbild Essig" onerror="this.src='https://placehold.co/800x600/e8f5e9/2e7d32?text=Bitte+Bild+einfügen+(startbild.jpg)'">
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Unser Sortiment</h2>
+          <p>Klicken Sie auf eine Kategorie, um die Produkte anzuzeigen.</p>
+        </div>
+
+        <details class="category-group" open> <summary class="category-header">🍇 Flaschen-Spezialitäten (500ml / 750ml)</summary>
+          <div class="category-content">
+            
+            <div class="grid">
+              <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Aceto_Balsamico_dkl_0.75L.png" alt="Aceto Dunkel" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Aceto Balsamico (dunkel)</h3>
+                  <div class="price">4,00 € (500 ml) | 6,00 € (750 ml)</div>
+                  <div class="desc">Kräftiger dunkler Aceto Balsamico mit intensiver Süße</div>
+                  <div class="note">Ideal für Dressings und perfekt für Rucola-, Tomaten- oder Carpaccio-Salate.</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Aceto_Balsamico_hell_0.75L.png" alt="Aceto Hell" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Aceto Balsamico (hell)</h3>
+                  <div class="price">4,00 € (500 ml) | 6,00 € (750 ml)</div>
+                  <div class="desc">Milder heller Aceto Balsamico mit feiner Süße.</div>
+                  <div class="note">Ideal für Dressings und perfekt für Tomaten-Mozzarella- oder Obstsalate.</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Apfel_Balsamessig_0.75L.png" alt="Apfel Balsam" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Apfel-Balsamessig</h3>
+                  <div class="price">5,50 € (500 ml) | 7,00 € (750 ml)</div>
+                  <div class="desc">Fruchtiger Apfel-Balsamessig mit mild-süßer Note.</div>
+                  <div class="note">Ideal für Dressings und perfekt für Feldsalat mit Nüssen oder Hähnchensalat.</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Himbeer_Balsamessig_0.75L.png" alt="Himbeer Balsam" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Himbeer-Balsamessig</h3>
+                  <div class="price">5,50 € (500 ml) | 7,00 € (750 ml)</div>
+                  <div class="desc">Fruchtiger Himbeer-Balsamessig mit süßlich-saurer Note.</div>
+                  <div class="note">Ideal für Dressings und perfekt für Feldsalat mit Ziegenkäse oder Beeren.</div>            
+                </div>
+              </article>
+              
+               <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Rotweinessig_0.75L.png" alt="Rotweinessig" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Rotwein-Essig</h3>
+                  <div class="price">3,50 € (500 ml) | 5,00 € (750 ml)</div>
+                  <div class="desc">Aromatischer Rotwein-Essig mit kräftiger Säure.</div>
+                  <div class="note">Ideal für Dressings und perfekt für Rote-Bete-, oder Tomatensalat, bzw. zu herzhaften Fleischgerichten.</div>
+                </div>
+              </article>
+
+               <article class="card">
+                <div class="card-img">
+                  <img src="Produkte/Flaschen/Weissweinessig_0.75L.png" alt="Weißweinessig" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+                </div>
+                <div class="card-body">
+                  <h3>Weißwein-Essig</h3>
+                  <div class="price">3,50 € (500 ml) | 5,00 € (750 ml)</div>
+                  <div class="desc">Frischer Weißwein-Essig mit milder Säure.</div>
+                  <div class="note">Ideal für Dressings und perfekt für Spargel- oder Gurkensalat, bzw. zu Fleischgerichten.</div>
+                </div>
+              </article>
+
+              <article class="card">
+               <div class="card-img">
+                <img src="Produkte/Flaschen/Thymianessig_0.5L.jpg" alt="Thymianessig" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+               </div>
+               <div class="card-body">
+                 <h3>Thymian-Essig</h3>
+                 <div class="price">3,50 € (500 ml) | 5,00 € (750 ml)</div>
+                 <div class="desc">Duftender Thymian-Essig mit feiner Kräuternote.</div>
+                 <div class="note">Ideal für Dressings und perfekt für Tomaten-Feta- oder Quinoasalat.</div>
+               </div>
+              </article>
+          
+              <article class="card">
+               <div class="card-img">
+                <img src="Produkte/Flaschen/Dillessig_0,75L.jpg" alt="Dillessig" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Bild+fehlt'">
+               </div>
+               <div class="card-body">
+                 <h3>Dill-Essig</h3>
+                 <div class="price">3,50 € (500 ml) | 5,00 € (750 ml)</div>
+                 <div class="desc">Frischer Dill-Essig mit feiner Kräuternote.</div>
+                 <div class="note">Ideal für Dressings und perfekt für Gurken- oder Kartoffelsalat.</div>
+              </div>
+              </article>
+          </div>
+        </details>
+
+
+        <details class="category-group">
+          <summary class="category-header">🏺 Aufgüsse & Abfüllware (Kanister / Lose)</summary>
+          <div class="category-content">
+            
+            <div class="grid-two">
+              <article class="card">
+                <div class="card-img">
+                   <img src="Produkte/Aufgüsse und Abfüllware/Gurkenaufguß.png" alt="Kanister" loading="lazy" onerror="this.src='https://placehold.co/400x300?text=Beispiel+Kanister'">
+                </div>
+                <div class="card-body">
+                  <h3>Kanisterware (5L / 10L)</h3>
+                  <div class="desc">Perfekt für die Vorratshaltung.</div>
+                </div>
+             </article>
+             <article class="card">
+               <div class="card-img">
+                <img src="Produkte/Aufgüsse und Abfüllware/Apfelessig_stockfoto.jpg" alt="Lose" loading="lazy" onerror="this.src='https://placehold.co/400x300?text=Beispiel+Abfüllung'">
+               </div>
+               <div class="card-body">
+                 <h3>Lose Abfüllung</h3>
+                 <div class="desc">Wir füllen Ihnen auch kleinere Mengen direkt vor Ort ab.</div>
+               </div>
+             </article>
+            </div>
+
+            <div class="price-table-container">
+              <table class="price-list">
+                <thead>
+                  <tr>
+                    <th style="width: 40%">Produkt</th>
+                    <th style="width: 25%">Preis / Liter</th>
+                    <th>Beschreibung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Branntweinessig (5% / 10%)</strong></td>
+                    <td><span class="price-tag">0,90 € / 1,10 €</span></td>
+                    <td>Klassischer Tafelessig.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Gurken-Aufguß</strong></td>
+                    <td><span class="price-tag">0,80 €</span></td>
+                    <td>Fertig gewürzt für Gurken.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Paprika-Aufguß</strong></td>
+                    <td><span class="price-tag">0,80 €</span></td>
+                    <td>Mild-würzig.</td>
+                  </tr>
+                   <tr>
+                    <td><strong>Rote-Bete-Aufguß</strong></td>
+                    <td><span class="price-tag">0,80 €</span></td>
+                    <td>Perfekt für Rote Bete.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Senfgurken-Aufguß</strong></td>
+                    <td><span class="price-tag">1,00 €</span></td>
+                    <td>Kräftig süß-sauer.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Apfel-Essig (lose)</strong></td>
+                    <td><span class="price-tag">2,00 €</span></td>
+                    <td>Fruchtig mild.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Kräuter-Essig (lose)</strong></td>
+                    <td><span class="price-tag">2,50 €</span></td>
+                    <td>Feine Kräuternote.</td>
+                  </tr>
+                   <tr>
+                    <td><strong>Balsamico hell/dunkel (lose)</strong></td>
+                    <td><span class="price-tag">7,00 €</span></td>
+                    <td>Unser Bestseller, offen erhältlich.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="padding:1rem; background:#f9f9f9; font-size:0.85rem; color:var(--text-muted); border-top:1px solid #eee;">
+                * Alle Preise inkl. MwSt. | Kanisterpreise gelten bei Abnahme von 5L oder 10L Gebinden.
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+
+        <details class="category-group">
+          <summary class="category-header">🥒 Eingelegtes & Einlegegewürze</summary>
+          <div class="category-content">
+             <p style="margin-bottom:1.5rem; color:var(--text-muted);">Hausgemachte Spezialitäten für die deftige Brotzeit oder zum Verfeinern.</p>
+             
+             <div class="grid">
+               <article class="card">
+                <div class="card-img">
+                  <span style="font-size:3rem;">🥒</span>
+                </div>
+                <div class="card-body">
+                  <h3>Gewürzgurken (im Glas)</h3>
+                  <div class="price">Preis auf Anfrage</div>
+                  <div class="desc">Knackige Gurken in unserem hauseigenen Aufguss eingelegt.</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-img">
+                  <span style="font-size:3rem;">🌶️</span>
+                </div>
+                <div class="card-body">
+                  <h3>Einlegegewürz-Mischung</h3>
+                  <div class="price">Preis auf Anfrage</div>
+                  <div class="desc">Die geheime Mischung für den perfekten Sud zuhause.</div>
+                </div>
+              </article>
+
+               <article class="card">
+                <div class="card-img">
+                  <span style="font-size:3rem;">🧅</span>
+                </div>
+                <div class="card-body">
+                  <h3>Silberzwiebeln</h3>
+                  <div class="price">Preis auf Anfrage</div>
+                  <div class="desc">Mild-sauer eingelegt, passend zu jedem Vesperbrett.</div>
+                </div>
+              </article>
+             </div>
+
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <section id="toepferwaren" style="background: white;">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Handgemachte Töpferwaren</h2>
+          <p>Einzigartige Stücke zur Deko oder als pfiffige Geschenkidee.</p>
+        </div>
+        
+        <div class="grid">
+           <article class="card">
+            <div class="card-img">
+              <img src="toepfern1.jpg" onerror="this.src='https://placehold.co/400x400/e0e0e0/555?text=Deko-Schale'">
+            </div>
+            <div class="card-body">
+              <h3>Deko-Schalen</h3>
+              <div class="desc">In verschiedenen Farben und Formen erhältlich.</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img">
+               <img src="toepfern2.jpg" onerror="this.src='https://placehold.co/400x400/e0e0e0/555?text=Garten-Deko'">
+            </div>
+            <div class="card-body">
+              <h3>Garten-Stecker</h3>
+              <div class="desc">Wetterfeste Keramik für Blumenbeete und Garten.</div>
+            </div>
+          </article>
+          
+          <article class="card">
+            <div class="card-img">
+               <img src="toepfern3.jpg" onerror="this.src='https://placehold.co/400x400/e0e0e0/555?text=Geschenk-Idee'">
+            </div>
+            <div class="card-body">
+              <h3>Geschenk-Sets</h3>
+              <div class="desc">Töpferware kombiniert mit unserem Essig – das perfekte Mitbringsel.</div>
+            </div>
+          </article>
+        </div>
+        
+        <div style="text-align:center; margin-top:2rem; font-style:italic; color:var(--text-muted);">
+          Da jedes Stück ein Unikat ist, variiert das Angebot ständig. Kommen Sie vorbei und stöbern Sie!
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Kontakt & Anfahrt</h2>
+          <p>So findest du uns:</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div style="margin-bottom: 1.5rem;">
+              <strong>🏠 Adresse</strong>
+              <div style="line-height: 1.3;">
+                Plattlinger Str. 38<br>
+                94486 Osterhofen
+              </div>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+              <strong>📞 Telefon</strong>
+              <div><a href="tel:+499932908934" style="color:var(--primary)">+49 9932 908934</a></div>
+            </div>
+            <div>
+              <strong>⏰ Öffnungszeiten</strong>
+              <div>Montag – Freitag: 09:00 – 12:00 Uhr</div>
+            </div>
+          </div>
+          
+          <div style="width: 100%; height: 350px;">
+             <iframe 
+               width="100%" 
+               height="100%" 
+               style="border:0" 
+               loading="lazy" 
+               allowfullscreen
+               referrerpolicy="no-referrer-when-downgrade"
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5266.142576854892!2d13.012648312646279!3d48.7041183711919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47750674031cf859%3A0xcf242420db6f5479!2sEssig%20Schiefl!5e0!3m2!1sen!2sde!4v1759554918117!5m2!1sen!2sde">
+             </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div style="margin-bottom: 0.5rem;">
+        © 2025 <strong>Essig Schiefl</strong> — Alle Rechte vorbehalten.
+      </div>
+      
+      <div style="font-size: 0.85rem; opacity: 0.8;">
+        <a href="impressum.html" style="text-decoration: none; color: inherit;">Impressum</a>
+         •  
+        <a href="datenschutz.html" style="text-decoration: none; color: inherit;">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
