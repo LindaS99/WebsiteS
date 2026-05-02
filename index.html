@@ -42,32 +42,7 @@
       margin: 0 auto;
       padding: 0 1.5rem;
     }
-  <!--========================================== -->
-  <!-- BANNER FÜR GEÄNDERTE ÖFFNUNGSZEITEN        -->
-  <!-- ZUM AKTIVIEREN: Die Zeile mit "<!--" und die Zeile mit "-->" löschen -->
-    
-    .top-info-bar {
-      background-color: var(--accent-red);
-      color: #ffffff;
-      text-align: center;
-      padding: 10px 15px;
-      font-size: 14px;
-      position: relative; 
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .top-info-bar strong {
-      color: #ffeb3b;
-      text-transform: uppercase;
-      margin-right: 5px;
-    }
-
-    @media (max-width: 480px) {
-      .top-info-bar { font-size: 13px; padding: 8px; }
-
-  <!-- ========================================== -->
-
+  
   <head
     /* --- HEADER --- */
     header {
@@ -250,10 +225,48 @@
     @media (min-width: 1024px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
     }
+    /* --- BANNER --- */
+    .top-info-bar {
+      background-color: var(--accent-red);
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 14px;
+      position: relative; 
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .top-info-bar strong {
+      color: #ffeb3b;
+      text-transform: uppercase;
+      margin-right: 5px;
+    }
+
+    @media (max-width: 480px) {
+      .top-info-bar { font-size: 13px; padding: 8px; }
+      
   </style>
 </head>
 <body>
+<!--========================================== -->
+  <!-- BANNER FÜR GEÄNDERTE ÖFFNUNGSZEITEN        -->
+   <!-- ZUM AKTIVIEREN: Entferne das "<!--" in der nächsten Zeile und das "-->" ganz am Ende -->
 
+<div class="top-info-bar">
+    <div class="banner-content">
+        ⚠️ <strong>Hinweis:</strong> 
+        
+        <!-- VARIANTE 1: Geänderte Zeiten -->
+        Heute geänderte Öffnungszeiten: Wir sind von 10:00 bis 12:00 Uhr für Sie da.
+        
+        <!-- VARIANTE 2: Geschlossen (einfach die andere Zeile löschen/auskommentieren) -->
+        <!-- Heute haben wir geschlossen. Ab morgen wieder normal! -->
+    </div>
+</div> 
+
+  <!-- ========================================== -->
+  
   <header>
     <div class="wrap header-content">
       <a href="#">
