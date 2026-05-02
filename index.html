@@ -42,7 +42,33 @@
       margin: 0 auto;
       padding: 0 1.5rem;
     }
+  <!--========================================== -->
+  <!-- BANNER FÜR GEÄNDERTE ÖFFNUNGSZEITEN        -->
+  <!-- ZUM AKTIVIEREN: Die Zeile mit "<!--" und die Zeile mit "-->" löschen -->
+    
+    .top-info-bar {
+      background-color: var(--accent-red);
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 14px;
+      position: relative; 
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
+    .top-info-bar strong {
+      color: #ffeb3b;
+      text-transform: uppercase;
+      margin-right: 5px;
+    }
+
+    @media (max-width: 480px) {
+      .top-info-bar { font-size: 13px; padding: 8px; }
+
+  <!-- ========================================== -->
+
+  <head
     /* --- HEADER --- */
     header {
       background: var(--card-bg);
